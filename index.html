@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aura Media — 원하는 장소로 찾아가는 출장 촬영·미디어 팀</title>
+<meta name="description" content="기업 행사, 프로필, 공간, 제품, 기념일·공연까지. 원하는 장소로 직접 찾아가는 출장 촬영 팀 Aura Media.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{--bg:#F8F8F6;--ink:#111;--sub:#666;--line:#DADAD6;--soft:#EDEDEA;--pad:clamp(20px,4vw,56px);
+--sans:"Inter","Pretendard Variable",Pretendard,sans-serif;--serif:"Instrument Serif","Pretendard Variable",serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.7 var(--sans);-webkit-font-smoothing:antialiased;word-break:keep-all}
+a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+img{display:block;width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
+.wrap{padding:0 var(--pad);max-width:1440px;margin:0 auto}
+section{padding:clamp(80px,12vw,160px) 0;border-top:1px solid var(--line)}
+.eyebrow{font:500 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--sub);margin-bottom:28px;display:block}
+h2{font:400 clamp(40px,7vw,104px)/1 var(--serif);letter-spacing:-.02em}
+h2 em{font-style:italic}
+.lead{color:var(--sub);max-width:520px;margin-top:24px}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin-bottom:clamp(40px,6vw,80px)}
+/* nav */
+header{position:fixed;inset:0 0 auto 0;z-index:50;background:rgba(248,248,246,.88);backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .3s}
+header.scrolled{border-color:var(--line)}
+.nav{display:flex;justify-content:space-between;align-items:center;height:68px}
+.logo{font:400 26px/1 var(--serif);letter-spacing:-.01em}
+.nav ul{display:flex;gap:36px;list-style:none;font-size:14px}
+.nav ul a{position:relative;padding:4px 0}
+.nav ul a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--ink);transition:width .3s}
+.nav ul a:hover::after{width:100%}
+.burger{display:none;font-size:14px}
+/* hero */
+.hero{padding-top:128px;border:0}
+.hero h1{font:400 clamp(52px,10.5vw,168px)/.95 var(--serif);letter-spacing:-.03em}
+.hero h1 em{font-style:italic}
+.hero-meta{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:32px;margin:clamp(32px,5vw,64px) 0;align-items:start}
+.hero-meta p{color:var(--sub);font-size:15px}
+.hero-meta b{display:block;font:500 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink);margin-bottom:12px}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;border:1px solid var(--ink);border-radius:999px;font-size:14px;font-weight:500;transition:.3s}
+.pill.solid{background:var(--ink);color:var(--bg)}
+.pill:hover{background:var(--ink);color:var(--bg)}.pill.solid:hover{background:transparent;color:var(--ink)}
+.hero-frame{aspect-ratio:21/9;overflow:hidden;background:var(--soft)}
+/* placeholder image */
+.ph{width:100%;height:100%;background:var(--soft);display:flex;align-items:flex-end;padding:16px;font:500 11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#999}
+.zoom{overflow:hidden;background:var(--soft)}
+.zoom>*{transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+.zoom:hover>*,.card:hover .zoom>*,.pkg:hover .zoom>*{transform:scale(1.05)}
+/* works */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:40px}
+.tab{padding:9px 18px;border:1px solid var(--line);border-radius:999px;font-size:13px;color:var(--sub);transition:.25s}
+.tab:hover,.tab.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:48px 24px}
+.card{cursor:pointer;text-align:left;display:block}
+.card:nth-child(3n+2){margin-top:64px}
+.card .zoom{margin-bottom:16px}
+.card h3{font:500 17px/1.4 var(--sans)}
+.card span{font-size:13px;color:var(--sub)}
+.card.hide{display:none}
+/* packages */
+.pkg{display:grid;grid-template-columns:70px 220px 1fr auto;gap:32px;align-items:center;padding:28px 0;border-top:1px solid var(--line);transition:padding .4s}
+.pkg:last-of-type{border-bottom:1px solid var(--line)}
+.pkg:hover{padding-left:16px;padding-right:16px}
+.pkg .no{font:400 14px var(--sans);color:var(--sub)}
+.pkg .zoom{aspect-ratio:var(--r,4/3)}
+.pkg h3{font:400 clamp(26px,3.4vw,44px)/1.15 var(--serif);letter-spacing:-.01em;margin-bottom:6px}
+.pkg p{color:var(--sub);font-size:15px;max-width:520px}
+.pkg .go{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:500}
+.pkg .arr{width:48px;height:48px;border:1px solid var(--ink);border-radius:50%;display:grid;place-items:center;font-size:18px;transition:.35s}
+.pkg:hover .arr{background:var(--ink);color:var(--bg);transform:rotate(45deg)}
+.note{margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.note p{color:var(--sub);font-size:15px}
+.rules{list-style:none;font-size:14px}
+.rules li{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid var(--line)}
+.rules span{color:var(--sub)}
+/* process */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--ink)}
+.step{padding:28px 24px 40px 0;border-bottom:1px solid var(--line)}
+.step i{font:italic 400 40px/1 var(--serif);display:block;margin-bottom:28px}
+.step b{display:block;font-weight:600;margin-bottom:6px}
+.step p{font-size:14px;color:var(--sub)}
+.spec{margin-top:96px;display:grid;grid-template-columns:1fr 2fr;gap:48px}
+.spec h3{font:400 40px/1.1 var(--serif)}
+.spec dl>div{display:grid;grid-template-columns:200px 1fr;gap:24px;padding:20px 0;border-top:1px solid var(--line)}
+.spec dt{font-weight:600;font-size:14px}.spec dd{color:var(--sub);font-size:15px}
+/* about */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,96px)}
+.about .zoom{aspect-ratio:4/5}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:48px 0}
+.stats b{display:block;font:400 clamp(44px,6vw,80px)/1 var(--serif)}
+.stats span{font-size:13px;color:var(--sub)}
+.strength{list-style:none}
+.strength li{padding:18px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:40px 1fr;font-size:15px}
+.strength li small{color:var(--sub)}
+.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:96px}
+.rev{padding:32px;border:1px solid var(--line);display:flex;flex-direction:column;justify-content:space-between;gap:32px;min-height:260px}
+.rev q{font:400 24px/1.35 var(--serif);quotes:none}
+.rev span{font-size:13px;color:var(--sub)}
+/* faq */
+.faq{display:grid;grid-template-columns:1fr 1.6fr;gap:48px}
+.acc{border-top:1px solid var(--ink)}
+.acc details{border-bottom:1px solid var(--line)}
+.acc summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;padding:24px 0;font-weight:500;font-size:17px}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary::after{content:"+";font-size:22px;line-height:1;transition:transform .3s}
+.acc details[open] summary::after{transform:rotate(45deg)}
+.acc details p{color:var(--sub);padding:0 48px 24px 0;font-size:15px}
+/* contact */
+form{display:grid;grid-template-columns:1fr 1fr;gap:28px 32px}
+.f{display:flex;flex-direction:column;gap:6px}.f.full{grid-column:1/-1}
+label{font-size:12px;letter-spacing:.08em;color:var(--sub)}
+input,select,textarea{font:inherit;font-size:16px;background:transparent;border:0;border-bottom:1px solid var(--ink);padding:10px 0;border-radius:0;outline:0;color:var(--ink)}
+input:focus,select:focus,textarea:focus{border-bottom-width:2px}
+.quick{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+.msg{grid-column:1/-1;font-size:14px;color:var(--sub)}
+/* footer */
+footer{background:var(--ink);color:var(--bg);padding:96px 0 32px}
+footer .big{font:400 clamp(64px,16vw,260px)/.9 var(--serif);letter-spacing:-.04em;margin-bottom:64px}
+.fcols{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;font-size:14px;color:#BDBDB8}
+.fcols b{display:block;color:var(--bg);font:500 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px}
+.fcols a:hover{color:#fff;text-decoration:underline}
+.copy{margin-top:64px;padding-top:24px;border-top:1px solid #333;display:flex;justify-content:space-between;font-size:12px;color:#888;flex-wrap:wrap;gap:12px}
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(17,17,17,.55);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
+.modal.open{display:flex}
+.sheet{background:var(--bg);width:min(1040px,100%);max-height:92vh;overflow:auto;padding:clamp(24px,4vw,48px);position:relative;animation:up .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.close{position:absolute;top:16px;right:20px;font-size:13px;border:1px solid var(--ink);border-radius:999px;padding:6px 14px}
+.mgrid{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;margin-top:24px}
+.mgrid .zoom{aspect-ratio:4/5}
+.mgrid h3{font:400 clamp(32px,4vw,52px)/1.1 var(--serif);margin-bottom:24px}
+.mgrid dl>div{padding:12px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:90px 1fr;font-size:14px}
+.mgrid dt{color:var(--sub)}
+.tag{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:2px 12px;margin:0 6px 6px 0;font-size:12px}
+.delivered{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:32px}
+.delivered .zoom{aspect-ratio:3/2}
+.ptabs{display:flex;gap:8px;margin:20px 0 28px;flex-wrap:wrap}
+.pbody p,.pbody li{font-size:15px;color:var(--sub);margin-bottom:10px}.pbody ul{padding-left:18px}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media(max-width:900px){
+.nav ul{position:fixed;inset:68px 0 auto 0;background:var(--bg);flex-direction:column;gap:0;padding:8px var(--pad) 24px;border-bottom:1px solid var(--line);display:none}
+.nav ul.open{display:flex}.nav ul a{display:block;padding:14px 0;font-size:18px}
+.burger{display:block}
+.hero-meta,.about,.faq,.spec,.note,.mgrid{grid-template-columns:1fr}
+.grid{grid-template-columns:1fr 1fr;gap:32px 16px}.card:nth-child(3n+2){margin-top:0}.card:nth-child(2n){margin-top:40px}
+.steps{grid-template-columns:1fr 1fr}.reviews{grid-template-columns:1fr}
+.pkg{grid-template-columns:36px 1fr 48px;gap:16px}.pkg .zoom{grid-column:2/3;grid-row:2}.pkg .txt{grid-column:2/3}.pkg .go{grid-row:1;grid-column:3}.pkg .go span{display:none}
+.hero-frame{aspect-ratio:4/3}.fcols{grid-template-columns:1fr 1fr}
+}
+@media(max-width:520px){.grid{grid-template-columns:1fr}.card:nth-child(2n){margin-top:0}form{grid-template-columns:1fr}.spec dl>div{grid-template-columns:1fr;gap:4px}.stats{grid-template-columns:1fr 1fr 1fr}.delivered{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header id="hd"><div class="wrap nav">
+  <a href="#top" class="logo">Aura Media</a>
+  <ul id="menu">
+    <li><a href="#work">Work</a></li><li><a href="#packages">Packages</a></li>
+    <li><a href="#process">Process</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="burger" id="burger" aria-label="메뉴">Menu</button>
+</div></header>
+
+<main id="top">
+<section class="hero"><div class="wrap">
+  <span class="eyebrow">On-location Photo &amp; Media Team</span>
+  <h1 class="reveal">원하는 장소로,<br><em>찾아가는</em> 촬영.</h1>
+  <div class="hero-meta reveal">
+    <p id="heroSub"></p>
+    <p><b>Fields</b><span id="heroFields"></span></p>
+    <p><b>Area</b><span id="heroArea"></span></p>
+  </div>
+  <div class="btns reveal">
+    <a class="pill solid" href="#packages">패키지 보기 ↓</a>
+    <a class="pill" href="#contact">맞춤 견적 문의</a>
+  </div>
+  <div class="hero-frame zoom reveal" style="margin-top:56px" id="heroFrame"></div>
+</div></section>
+
+<section id="work"><div class="wrap">
+  <div class="sec-head"><div><span class="eyebrow">01 — Selected Works</span><h2>Selected <em>Works</em></h2></div>
+  <p class="lead">현장의 공기와 사람의 표정을 있는 그대로. 카드를 열면 촬영 배경과 납품 컷을 볼 수 있습니다.</p></div>
+  <div class="tabs" id="tabs"></div>
+  <div class="grid" id="grid"></div>
+</div></section>
+
+<section id="packages"><div class="wrap">
+  <div class="sec-head"><div><span class="eyebrow">02 — Services &amp; Packages</span><h2>Shooting <em>Packages</em></h2></div>
+  <p class="lead">다섯 가지 촬영 패키지. 구성·가격·안전결제는 크몽에서 확인하세요.</p></div>
+  <div id="pkgs"></div>
+  <div class="note">
+    <p>상세 구성·가격·안전결제는 크몽에서 바로 확인하실 수 있습니다. 기업 맞춤형 별도 견적이나 세금계산서 발행이 필요한 경우 하단 문의 폼을 이용해 주세요.</p>
+    <ul class="rules" id="rules"></ul>
+  </div>
+</div></section>
+
+<section id="process"><div class="wrap">
+  <div class="sec-head"><div><span class="eyebrow">03 — Process &amp; Deliverables</span><h2>How we <em>work</em></h2></div>
+  <p class="lead">문의부터 사진 전달까지, 여덟 단계로 투명하게 진행합니다.</p></div>
+  <div class="steps" id="steps"></div>
+  <div class="spec"><h3>Deliverables<br><em>at a glance</em></h3><dl id="spec"></dl></div>
+</div></section>
+
+<section id="about"><div class="wrap">
+  <div class="about">
+    <div class="zoom reveal" id="aboutImg"></div>
+    <div>
+      <span class="eyebrow">04 — About Team</span>
+      <h2 style="font-size:clamp(40px,5vw,72px)">장소가 달라도,<br><em>기준은 같게.</em></h2>
+      <p class="lead" id="aboutTxt" style="max-width:none"></p>
+      <div class="stats" id="stats"></div>
+      <ul class="strength" id="strength"></ul>
+    </div>
+  </div>
+  <div class="reviews" id="reviews"></div>
+</div></section>
+
+<section id="faq"><div class="wrap">
+  <div class="faq">
+    <div><span class="eyebrow">05 — FAQ &amp; Policies</span><h2>Good to <em>know</em></h2>
+    <div class="btns" style="margin-top:32px" id="policyBtns"></div></div>
+    <div class="acc" id="acc"></div>
+  </div>
+</div></section>
+
+<section id="contact"><div class="wrap">
+  <div class="sec-head"><div><span class="eyebrow">06 — Contact</span><h2>Let’s <em>talk</em></h2></div>
+  <p class="lead">크몽 패키지 외 맞춤 촬영, 기업(B2B) 문의는 아래 양식으로 남겨주세요. <b id="replyTime" style="color:var(--ink)"></b></p></div>
+  <form id="form">
+    <div class="f"><label>촬영 종류</label><select name="type" id="fType" required></select></div>
+    <div class="f"><label>희망 일시</label><input name="date" type="datetime-local" required></div>
+    <div class="f"><label>촬영 장소</label><input name="place" placeholder="예: 서울 성수동 OO빌딩" required></div>
+    <div class="f"><label>인원 / 규모</label><input name="size" placeholder="예: 임직원 40명 / 행사 3시간" required></div>
+    <div class="f"><label>사용 목적</label><input name="purpose" placeholder="예: 사내 홍보물, 채용 페이지, SNS" required></div>
+    <div class="f"><label>예산 (선택)</label><input name="budget" placeholder="예: 100만원 내외"></div>
+    <div class="f"><label>연락처</label><input name="contact" placeholder="휴대폰 또는 이메일" required></div>
+    <div class="f"><label>참고 자료 링크 (선택)</label><input name="ref" type="url" placeholder="https://"></div>
+    <div class="f full"><label>추가 요청사항 (선택)</label><textarea name="memo" rows="3"></textarea></div>
+    <div class="f full"><label style="display:flex;gap:8px;align-items:center;letter-spacing:0"><input type="checkbox" required style="width:auto"> 개인정보 수집·이용에 동의합니다 (문의 응대 목적, 처리 후 파기)</label></div>
+    <div class="full btns"><button class="pill solid" type="submit">문의 보내기 ↗</button></div>
+    <p class="msg" id="msg"></p>
+  </form>
+  <div class="quick" id="quick"></div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <div class="big">Aura Media</div>
+  <div class="fcols" id="fcols"></div>
+  <div class="copy"><span>© <span id="yr"></span> Aura Media. All rights reserved.</span><span id="biz"></span></div>
+</div></footer>
+
+<div class="modal" id="modal"><div class="sheet" id="sheet"></div></div>
+
+<script>
+/* ============================================================
+   DATA — 이 영역만 수정하면 사이트 전체에 반영됩니다.
+   "[입력]" 표시는 확정 후 교체하세요.
+   이미지: src 에 파일 경로/URL 을 넣으면 자동 적용(빈 값이면 회색 플레이스홀더)
+   ============================================================ */
+const SITE = {
+  name:"Aura Media", insta:"https://www.instagram.com/auramedia_inc/", instaHandle:"@auramedia_inc",
+  heroSub:"기업 행사부터 프로필, 공간, 제품, 기념일까지. 장비와 팀이 직접 현장으로 갑니다. 일정과 장소만 알려주세요.",
+  fields:"기업 행사 · 프로필/단체 · 공간 · 제품/음식 · 기념일/공연",
+  area:"서울·경기 기본 출장 / 그 외 지역 실비 협의",   // [확인 필요]
+  heroImg:"",
+  replyTime:"영업일 기준 24시간 이내 회신드립니다.",   // [확인 필요]
+  hours:"평일 10:00 – 19:00 (주말·공휴일 휴무)",        // [입력]
+  email:"[이메일 입력]", phone:"[대표 연락처 입력]",
+  kakao:"", // 카카오톡 채널 URL (예: https://pf.kakao.com/_xxxx)
+  biz:"상호명 [입력] · 대표자 [입력] · 사업자등록번호 [입력]",
+  formTo:"" // 문의 폼 수신 이메일. 비우면 email 값을 사용 (백엔드 연결 전 mailto 방식)
+};
+
+const PACKAGES = [  // ratio: 썸네일 비율
+  {no:"01", title:"기업 행사 · 컨퍼런스 스냅", desc:"컨퍼런스, 세미나, 사내 행사를 놓치는 장면 없이. 주요 인물과 필수 컷을 사전에 확인하고 촬영합니다.", ratio:"4/3", img:"", url:"https://kmong.com/gig/852984"},
+  {no:"02", title:"임직원 프로필 · 단체 촬영", desc:"사무실로 찾아가는 프로필과 팀 단체사진. 채용·IR·홈페이지에 바로 쓸 수 있는 톤으로 맞춥니다.", ratio:"3/4", img:"", url:"https://kmong.com/gig/855704"},
+  {no:"03", title:"매장 · 공간 · 인테리어 촬영", desc:"공간의 분위기와 동선을 담는 무드 촬영. 오픈, 리뉴얼, 입점 소개용으로 추천합니다.", ratio:"3/2", img:"", url:"https://kmong.com/gig/855706"},
+  {no:"04", title:"제품 · 메뉴 · 브랜드 룩북", desc:"제품과 메뉴, 브랜드 룩북까지. 온라인 스토어와 SNS에서 선명하게 보이는 컷을 만듭니다.", ratio:"1/1", img:"", url:"https://kmong.com/gig/852961"},
+  {no:"05", title:"가족 · 기념일 · 공연/축제 스냅", desc:"가족 행사, 기념일, 공연과 축제 현장을 자연스럽게. 그날의 표정을 있는 그대로 남깁니다.", ratio:"4/3", img:"", url:"https://kmong.com/gig/853677"}
+];
+
+const RULES = [
+  ["출장 가능 지역","서울·경기 기본 / 타 지역 협의"],     // [확인 필요]
+  ["추가 출장비","기본 지역 외 실비 협의"],
+  ["연장 촬영","시간 단위 추가 (크몽 옵션 기준)"],
+  ["주말·야간","별도 협의 및 추가 요금 가능"]
+];
+
+const CATEGORIES = ["전체","기업 행사","프로필·단체","공간·인테리어","제품·음식","기념일·스냅","공연·축제"];
+
+const WORKS = [  // 실제 프로젝트로 교체하세요. img/shots 비워두면 플레이스홀더.
+  {id:1,cat:"기업 행사",title:"테크 컨퍼런스 현장 기록",meta:"Corporate · 2025",ratio:"4/5",img:"",purpose:"연사 세션과 네트워킹 현장을 사후 홍보 자료로 정리",place:"서울 코엑스",tags:["에너지","정돈된","자연광"],flow:"사전 연사·VIP 리스트 확인 → 2인 현장 촬영 → 당일 하이라이트 전달",shots:["","",""]},
+  {id:2,cat:"프로필·단체",title:"스타트업 팀 프로필",meta:"Profile · 2025",ratio:"3/4",img:"",purpose:"채용 페이지 및 IR 자료용 임직원 프로필",place:"서울 성수동 사무실",tags:["담백한","신뢰감","미니멀"],flow:"사무실 한 켠에 간이 스튜디오 세팅 → 1인당 약 10분 → 컷 선택 후 보정",shots:["","",""]},
+  {id:3,cat:"공간·인테리어",title:"카페 오픈 무드 촬영",meta:"Space · 2025",ratio:"3/2",img:"",purpose:"오픈 안내 및 SNS 소개용 공간 컷",place:"경기 성남",tags:["따뜻한","차분한","디테일"],flow:"공간 동선 사전 확인 → 시간대별 자연광 촬영 → 디테일 컷 추가",shots:["","",""]},
+  {id:4,cat:"제품·음식",title:"디저트 브랜드 룩북",meta:"Product · 2025",ratio:"1/1",img:"",purpose:"온라인 스토어 상세페이지 및 룩북",place:"서울 마포",tags:["선명한","미니멀","에디토리얼"],flow:"스타일링 콘셉트 협의 → 현장 세팅 촬영 → 정밀 보정",shots:["","",""]},
+  {id:5,cat:"기념일·스냅",title:"가족 기념일 스냅",meta:"Family · 2025",ratio:"4/5",img:"",purpose:"가족 모임의 자연스러운 순간 기록",place:"서울 근교 야외",tags:["자연스러운","따뜻한","밝은"],flow:"동선·포즈 가이드 안내 → 자연스러운 진행 → 색감 보정 후 전달",shots:["","",""]},
+  {id:6,cat:"공연·축제",title:"지역 축제 현장 스냅",meta:"Festival · 2025",ratio:"3/2",img:"",purpose:"주최 측 결과 보고 및 홍보 아카이브",place:"경기 일대",tags:["생동감","현장감","다이내믹"],flow:"프로그램 타임라인 사전 공유 → 구역별 분담 촬영 → 순차 전달",shots:["","",""]}
+];
+
+const STEPS = [
+  ["문의","크몽 또는 문의 폼으로 촬영 내용을 남깁니다."],
+  ["일정 확인","희망 일시와 장소의 가능 여부를 확인합니다."],
+  ["견적·결제","패키지 선택 후 크몽 안전결제로 진행합니다."],
+  ["예약 확정","결제 확인 후 일정이 확정됩니다."],
+  ["사전 협의","필수 장면, 주요 인물, 분위기를 미리 맞춥니다."],
+  ["현장 촬영","예비 장비를 갖추고 현장으로 찾아갑니다."],
+  ["보정","기본 색감 보정 또는 정밀 보정을 진행합니다."],
+  ["사진 전달","다운로드 링크로 안전하게 전달드립니다."]
+];
+
+const SPEC = [  // [확인 필요] 실제 기준으로 교체
+  ["원본 제공","JPG 보정본 기본 제공 / RAW 제공 여부는 패키지별 상이 [입력]"],
+  ["보정 기준","기본 색감 보정: 밝기·색온도·대비 정리 / 정밀 보정: 피부·잡티·배경 정리 포함"],
+  ["납품 소요 기간","촬영 후 영업일 기준 [입력]일 이내"],
+  ["전달 방식","온라인 다운로드 링크 (크몽 납품 또는 클라우드)"],
+  ["보관 기간","납품 후 [입력]일간 보관, 이후 파기"]
+];
+
+const ABOUT = {
+  text:"Aura Media는 장소에 구애받지 않고 현장으로 직접 찾아가는 사진·미디어 팀입니다. 촬영 전 충분히 듣고, 촬영 중에는 현장을 방해하지 않으며, 촬영 후에는 약속한 일정에 정확히 전달합니다.",
+  img:"",
+  stats:[["5","촬영 패키지"],["8","진행 단계"],["2+","팀 인력 (현장 기준)"]],   // [확인 필요]
+  strengths:[["예비 장비 구비","카메라·렌즈·조명을 여분으로 지참해 변수에 대비합니다."],["사전 확인","주요 인물과 필수 장면을 행사 전에 체크리스트로 공유받습니다."],["현장 배려","행사 흐름과 참석자를 방해하지 않는 동선으로 촬영합니다."],["납품 대응","전달 후 수정·추가 요청도 정해진 기준 안에서 빠르게 응대합니다."]]
+};
+
+const REVIEWS = [  // 실제 후기로 교체 (아래는 샘플 문구)
+  {q:"약속한 시간에 정확히 도착했고, 현장 진행을 방해하지 않아서 좋았습니다.",by:"기업 행사 담당자 · 샘플"},
+  {q:"사전에 꼭 필요한 컷을 꼼꼼히 확인해 주셔서 빠뜨린 장면이 없었어요.",by:"스타트업 대표 · 샘플"},
+  {q:"납품 일정이 정확했고 수정 요청에도 친절하게 대응해 주셨습니다.",by:"매장 운영자 · 샘플"}
+];
+
+const FAQ = [  // [확인 필요] 정책 확정 후 수정
+  ["예약은 언제까지 해야 하나요?","촬영일 기준 최소 7일 전 예약을 권장합니다. 일정이 급하다면 문의 폼으로 가능 여부를 먼저 확인해 주세요."],
+  ["포즈 가이드가 있나요?","프로필·가족 촬영은 현장에서 자연스러운 포즈를 안내해 드립니다. 어색하셔도 괜찮습니다."],
+  ["원본 파일도 받을 수 있나요?","패키지별로 상이합니다. 보정본 JPG가 기본이며, 원본/RAW 제공 여부는 크몽 상품 페이지에서 확인하세요."],
+  ["납품은 얼마나 걸리나요?","촬영 후 영업일 기준 [입력]일 이내입니다. 행사 규모에 따라 달라질 수 있습니다."],
+  ["촬영 시간이 초과되면요?","사전 협의된 시간 초과 시 시간 단위로 연장 요금이 발생합니다. 현장에서 먼저 안내드립니다."],
+  ["우천 시 일정은 어떻게 되나요?","야외 촬영은 우천 시 일정 변경이 가능하며, 변경 기준은 예약 변경 정책을 따릅니다."],
+  ["세금계산서 발행이 가능한가요?","가능합니다. 크몽 결제 시 증빙 발행 또는 문의 폼으로 별도 요청해 주세요."],
+  ["상업적·광고 활용이 가능한가요?","납품 사진은 계약 목적 범위 내에서 활용 가능합니다. 대규모 광고 집행 등은 사전 협의해 주세요."]
+];
+
+const POLICIES = {
+  "예약·취소·환불":["예약 변경은 촬영 [입력]일 전까지 가능합니다.","취소·환불은 크몽 환불 규정과 팀 운영 기준에 따라 처리됩니다. [입력]","우천 등 불가피한 사유의 일정 변경은 1회 무료입니다. [확인 필요]"],
+  "사진 활용(초상권)":["납품 사진은 촬영 목적 범위 내에서 이용 가능합니다.","팀 포트폴리오 및 SNS 공개는 사전 동의한 경우에만 진행합니다.","공개를 원치 않으시면 예약 시 알려주세요. 즉시 반영됩니다."],
+  "개인정보 안내":["수집 항목: 이름, 연락처, 촬영 정보 / 목적: 문의 응대 및 예약 진행","보유 기간: 문의 처리 후 [입력]개월, 이후 지체 없이 파기","동의를 거부할 수 있으나, 이 경우 문의 접수가 제한될 수 있습니다."]
+};
+
+/* ============================================================ */
+const $=(s,r=document)=>r.querySelector(s);
+const ph=(label,ratio)=>`<div class="ph" style="aspect-ratio:${ratio||'4/3'}">${label||'Image'}</div>`;
+const pic=(src,alt,ratio)=>src?`<img src="${src}" alt="${alt}" loading="lazy" style="aspect-ratio:${ratio||'auto'}">`:ph(alt,ratio);
+
+// hero
+$('#heroSub').textContent=SITE.heroSub;$('#heroFields').textContent=SITE.fields;$('#heroArea').textContent=SITE.area;
+$('#heroFrame').innerHTML=SITE.heroImg?`<img src="${SITE.heroImg}" alt="Aura Media 대표 이미지">`:ph('Hero — 대표 이미지 영역','21/9');
+$('#replyTime').textContent=SITE.replyTime;
+
+// works
+$('#tabs').innerHTML=CATEGORIES.map((c,i)=>`<button class="tab${i?'':' on'}" data-c="${c}">${c}</button>`).join('');
+$('#grid').innerHTML=WORKS.map(w=>`<button class="card reveal" data-id="${w.id}" data-cat="${w.cat}"><div class="zoom">${pic(w.img,w.title,w.ratio)}</div><h3>${w.title}</h3><span>${w.cat} · ${w.meta}</span></button>`).join('');
+$('#tabs').addEventListener('click',e=>{const b=e.target.closest('.tab');if(!b)return;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t===b));
+  document.querySelectorAll('.card').forEach(c=>c.classList.toggle('hide',b.dataset.c!=='전체'&&c.dataset.cat!==b.dataset.c));});
+$('#grid').addEventListener('click',e=>{const c=e.target.closest('.card');if(!c)return;
+  const w=WORKS.find(x=>x.id==c.dataset.id);
+  open_(`<button class="close" data-x>닫기</button><span class="eyebrow">${w.cat} · ${w.meta}</span>
+  <div class="mgrid"><div class="zoom">${pic(w.img,w.title,'4/5')}</div><div><h3>${w.title}</h3>
+  <dl><div><dt>촬영 목적</dt><dd>${w.purpose}</dd></div><div><dt>장소</dt><dd>${w.place}</dd></div>
+  <div><dt>분위기</dt><dd>${w.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</dd></div>
+  <div><dt>진행 방식</dt><dd>${w.flow}</dd></div></dl>
+  <div class="btns" style="margin-top:28px"><a class="pill solid" href="#packages" data-x>패키지 보기</a></div></div></div>
+  <div class="delivered">${w.shots.map((s,i)=>`<div class="zoom">${pic(s,'납품 컷 0'+(i+1),'3/2')}</div>`).join('')}</div>`);});
+
+// packages — 모든 카드가 PACKAGES[].url 로 새 탭 이동
+$('#pkgs').innerHTML=PACKAGES.map(p=>`<a class="pkg reveal" href="${p.url}" target="_blank" rel="noopener noreferrer" aria-label="${p.title} — 크몽에서 상세 패키지·가격 보기 (새 탭)">
+  <span class="no">${p.no}</span><div class="zoom" style="--r:${p.ratio}">${pic(p.img,p.title,p.ratio)}</div>
+  <div class="txt"><h3>${p.title}</h3><p>${p.desc}</p></div>
+  <div class="go"><span>크몽에서 상세 패키지·가격 보기</span><div class="arr">↗</div></div></a>`).join('');
+$('#rules').innerHTML=RULES.map(r=>`<li><b style="font-weight:500">${r[0]}</b><span>${r[1]}</span></li>`).join('');
+
+// process
+$('#steps').innerHTML=STEPS.map((s,i)=>`<div class="step reveal"><i>${String(i+1).padStart(2,'0')}</i><b>${s[0]}</b><p>${s[1]}</p></div>`).join('');
+$('#spec').innerHTML=SPEC.map(s=>`<div><dt>${s[0]}</dt><dd>${s[1]}</dd></div>`).join('');
+
+// about
+$('#aboutImg').innerHTML=pic(ABOUT.img,'Team',"4/5");$('#aboutTxt').textContent=ABOUT.text;
+$('#stats').innerHTML=ABOUT.stats.map(s=>`<div><b data-n="${s[0]}">${s[0]}</b><span>${s[1]}</span></div>`).join('');
+$('#strength').innerHTML=ABOUT.strengths.map((s,i)=>`<li><small>0${i+1}</small><div><b style="font-weight:600">${s[0]}</b><br><span style="color:var(--sub)">${s[1]}</span></div></li>`).join('');
+$('#reviews').innerHTML=REVIEWS.map(r=>`<div class="rev reveal"><q>“${r.q}”</q><span>${r.by}</span></div>`).join('');
+
+// faq & policies
+$('#acc').innerHTML=FAQ.map(f=>`<details><summary>${f[0]}</summary><p>${f[1]}</p></details>`).join('');
+$('#policyBtns').innerHTML=Object.keys(POLICIES).map(k=>`<button class="pill" data-p="${k}">${k}</button>`).join('');
+function policy(k){open_(`<button class="close" data-x>닫기</button><span class="eyebrow">Policies</span>
+ <div class="ptabs">${Object.keys(POLICIES).map(t=>`<button class="tab${t===k?' on':''}" data-p="${t}">${t}</button>`).join('')}</div>
+ <div class="pbody"><ul>${POLICIES[k].map(l=>`<li>${l}</li>`).join('')}</ul></div>`);}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-p]');if(b)policy(b.dataset.p);});
+
+// contact
+$('#fType').innerHTML='<option value="">선택해 주세요</option>'+CATEGORIES.slice(1).map(c=>`<option>${c}</option>`).join('')+'<option>기타 / 복합 촬영</option>';
+const q=[];if(SITE.kakao)q.push(`<a class="pill" href="${SITE.kakao}" target="_blank" rel="noopener noreferrer">카카오톡 상담 ↗</a>`);
+if(!/입력/.test(SITE.phone))q.push(`<a class="pill" href="tel:${SITE.phone.replace(/[^0-9+]/g,'')}">전화 문의</a>`);
+q.push(`<a class="pill" href="${SITE.insta}" target="_blank" rel="noopener noreferrer">Instagram ↗</a>`);
+$('#quick').innerHTML=q.join('');
+$('#form').addEventListener('submit',e=>{e.preventDefault();
+  const d=Object.fromEntries(new FormData(e.target));
+  const to=SITE.formTo||SITE.email;
+  if(/입력/.test(to)){$('#msg').textContent='수신 이메일이 아직 설정되지 않았습니다. 상단 SITE.email 을 입력해 주세요.';return;}
+  const body=`촬영 종류: ${d.type}\n희망 일시: ${d.date}\n장소: ${d.place}\n인원/규모: ${d.size}\n사용 목적: ${d.purpose}\n예산: ${d.budget||'-'}\n연락처: ${d.contact}\n참고 링크: ${d.ref||'-'}\n요청사항: ${d.memo||'-'}`;
+  location.href=`mailto:${to}?subject=${encodeURIComponent('[Aura Media 문의] '+d.type)}&body=${encodeURIComponent(body)}`;
+  $('#msg').textContent='메일 앱이 열립니다. 전송 후 '+SITE.replyTime;});
+
+// footer
+$('#fcols').innerHTML=`<div><b>Contact</b>${SITE.email}<br>${SITE.phone}</div>
+<div><b>Hours</b>${SITE.hours}</div>
+<div><b>Social</b><a href="${SITE.insta}" target="_blank" rel="noopener noreferrer">Instagram ${SITE.instaHandle} ↗</a></div>
+<div><b>Order</b><a href="#packages">크몽 패키지 보기</a></div>`;
+$('#biz').textContent=SITE.biz;$('#yr').textContent=new Date().getFullYear();
+
+// modal
+function open_(h){$('#sheet').innerHTML=h;$('#modal').classList.add('open');document.body.style.overflow='hidden';}
+function close_(){$('#modal').classList.remove('open');document.body.style.overflow='';}
+$('#modal').addEventListener('click',e=>{if(e.target.id==='modal'||e.target.closest('[data-x]'))close_();});
+addEventListener('keydown',e=>{if(e.key==='Escape')close_();});
+
+// nav / reveal
+const hd=$('#hd');addEventListener('scroll',()=>hd.classList.toggle('scrolled',scrollY>10),{passive:true});
+$('#burger').onclick=()=>$('#menu').classList.toggle('open');
+$('#menu').addEventListener('click',()=>$('#menu').classList.remove('open'));
+const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+// count-up
+const co=new IntersectionObserver(es=>es.forEach(x=>{if(!x.isIntersecting)return;const el=x.target,t=parseInt(el.dataset.n),suf=el.dataset.n.replace(/[0-9]/g,'');let s=null;
+  const f=ts=>{s=s||ts;const p=Math.min((ts-s)/1200,1);el.textContent=Math.round(t*p)+suf;if(p<1)requestAnimationFrame(f);};requestAnimationFrame(f);co.unobserve(el);}),{threshold:.6});
+document.querySelectorAll('[data-n]').forEach(el=>co.observe(el));
+</script>
+</body>
+</html>
